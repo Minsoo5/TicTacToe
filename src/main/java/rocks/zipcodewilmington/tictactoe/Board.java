@@ -12,11 +12,37 @@ public class Board {
     }
 
     public Boolean isInFavorOfX() {
-        return null;
+        boolean truth = false;
+
+        if (getWinner() == "") {
+             if (checkFavor('X')) {
+                 truth = true;
+             } else {
+                 truth = false;
+             }
+
+        } else if (getWinner() == "X") {
+            truth = true;
+        }
+
+        return truth;
     }
 
     public Boolean isInFavorOfO() {
-        return null;
+        boolean truth = false;
+
+        if (getWinner() == "") {
+            if (checkFavor('O')) {
+                truth = true;
+            } else {
+                truth = false;
+            }
+
+        } else if (getWinner() == "O") {
+            truth = true;
+        }
+
+        return truth;
     }
 
     public Boolean isTie() {
@@ -32,7 +58,7 @@ public class Board {
         if (checkRowFor('X') == true || checkColumnFor('X') == true || checkDiag('X') == true) {
             winner = "X";
         } else if (checkRowFor('O') == true || checkColumnFor('O') == true || checkDiag('O') == true) {
-            winner = "Y";
+            winner = "O";
         } else winner = "";
         return winner;
     }
@@ -63,7 +89,8 @@ public class Board {
 
     public Boolean checkDiag(char check) {
         boolean didWin = false;
-        if ((board[0][0] == check && board[1][1] == check && board[2][2] == check)) {
+        if ((board[0][0] == check && board[1][1] == check && board[2][2] == check) ||
+            (board[0][2] == check && board[1][1] == check && board[2][0] == check)) {
             didWin = true;
         }
 
@@ -72,10 +99,37 @@ public class Board {
 
     public Boolean checkFavor(char check) {
         boolean inFavor = false;
-        //check
+        //check if empty space is surrounded by check or followed by two char
 
+        if     ((board[0][0] ==  ' '  && board[1][0] == check && board[2][0] == check) ||
+                (board[0][0] == check && board[1][0] ==  ' '  && board[2][0] == check) ||
+                (board[0][0] == check && board[1][0] == check && board[2][0] ==  ' ' ) ||
+                (board[0][1] ==  ' '  && board[1][1] == check && board[2][1] == check) ||
+                (board[0][1] == check && board[1][1] ==  ' '  && board[2][1] == check) ||
+                (board[0][1] == check && board[1][1] == check && board[2][1] ==  ' ' ) ||
+                (board[0][2] ==  ' '  && board[1][2] == check && board[2][2] == check) ||
+                (board[0][2] == check && board[1][2] ==  ' '  && board[2][2] == check) ||
+                (board[0][2] == check && board[1][2] == check && board[2][2] ==  ' ' )) {
+            inFavor = true;
 
-      return null;
+        } else if ((board[0][0] ==  ' '  && board[0][1] == check && board[0][2] == check) ||
+                   (board[0][0] == check && board[0][1] ==  ' '  && board[0][2] == check) ||
+                   (board[0][0] == check && board[0][1] == check && board[0][2] ==  ' ' ) ||
+                   (board[1][0] ==  ' '  && board[1][1] == check && board[1][2] == check) ||
+                   (board[1][0] == check && board[1][1] ==  ' '  && board[1][2] == check) ||
+                   (board[1][0] ==  ' '  && board[1][1] == check && board[1][2] ==  ' ' ) ||
+                   (board[2][0] == check && board[2][1] ==  ' '  && board[2][2] == check) ||
+                   (board[2][0] == check && board[2][1] == check && board[2][2] ==  ' ' )) {
+            inFavor = true;
+
+        } else if   ((board[0][0] ==  ' '  && board[1][1] == check && board[2][2] == check) ||
+                     (board[0][0] == check && board[1][1] ==  ' '  && board[2][2] == check) ||
+                     (board[0][0] == check && board[1][1] == check && board[2][2] ==  ' ' )) {
+            inFavor = true;
+
+        } else inFavor = false;
+
+        return inFavor;
     }
 
 }
