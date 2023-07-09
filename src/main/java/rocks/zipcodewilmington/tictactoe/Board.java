@@ -20,15 +20,18 @@ public class Board {
     }
 
     public Boolean isTie() {
-        if(getWinner() == "");
-        return true;
+        boolean tie = false;
+        if(getWinner() == "") {
+            tie = true;
+        }
+        return tie;
     }
 
     public String getWinner() {
         String winner = "";
         if (checkRowFor('X') == true || checkColumnFor('X') == true || checkDiag('X') == true) {
             winner = "X";
-        } else if (checkColumnFor('Y') == true || checkColumnFor('Y') == true || checkDiag('Y') == true) {
+        } else if (checkRowFor('O') == true || checkColumnFor('O') == true || checkDiag('O') == true) {
             winner = "Y";
         } else winner = "";
         return winner;
@@ -65,6 +68,14 @@ public class Board {
         }
 
         return didWin;
+    }
+
+    public Boolean checkFavor(char check) {
+        boolean inFavor = false;
+        //check
+
+
+      return null;
     }
 
 }
